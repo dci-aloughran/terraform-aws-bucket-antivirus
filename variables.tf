@@ -26,3 +26,9 @@ variable "antivirus-update-rate" {
   type        = string
   default     = "3 hours"
 }
+
+variable "lambda_path" {
+  description = "Sets the path to the lambda.zip if pre-built"
+  type = string
+  default = "/tmp/bucket-antivirus-function/build/lambda.zip"
+}
