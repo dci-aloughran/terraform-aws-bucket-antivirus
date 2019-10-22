@@ -15,15 +15,9 @@ container_dir=/opt/app
 rm -rf bin/
 rm -rf build/
 
-docker run --rm -i \
-  -v $(pwd):$container_dir \
-  -w=$container_dir \
-  amazonlinux:$AMZ_LINUX_VERSION \
-  /bin/bash -c "./build_lambda.sh"
+echo "You are currently in the working directory:"
+echo $(pwd)
+docker run --rm -i -v $(pwd):$container_dir -w=$container_dir amazonlinux:$AMZ_LINUX_VERSION /bin/bash -c "ls && ./build_lambda.sh"
 
 # restore current user permissions
-docker run --rm -i \
-  -v $(pwd):$container_dir \
-  -w=$container_dir \
-  amazonlinux:$AMZ_LINUX_VERSION \
-  /bin/bash -c "chown -R $(id -u ${USER}):$(id -g ${USER}) ."
+docker run --rm -i -v $(pwd):$container_dir -w=$container_dir amazonlinux:$AMZ_LINUX_VERSION /bin/bash -c "chown -R $(id -u ${USER}):$(id -g ${USER}) ."
